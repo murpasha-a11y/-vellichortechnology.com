@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vellichor Technology — Pharmacy First Optimiser</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#0d1b2a;color:#f1f5f9;line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,27,42,0.95);border-bottom:1px solid rgba(34,211,203,0.15);padding:0 5vw}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-logo .name{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.08em;color:#f1f5f9}
+.nav-logo .sub{font-size:9px;letter-spacing:0.3em;color:#22d3cb;font-weight:300;text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;color:#94a3b8;text-decoration:none;letter-spacing:0.03em;transition:color 0.2s}
+.nav-links a:hover{color:#22d3cb}
+.nav-cta{background:#22d3cb;color:#0d1b2a;font-size:13px;font-weight:500;padding:8px 20px;border-radius:6px;text-decoration:none;letter-spacing:0.02em;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.85}
+
+section{padding:100px 5vw}
+.inner{max-width:1200px;margin:0 auto}
+
+.hero{padding:160px 5vw 120px;text-align:center;background:#0d1b2a}
+.hero-label{display:inline-block;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#22d3cb;border:1px solid rgba(34,211,203,0.3);padding:5px 16px;border-radius:20px;margin-bottom:32px}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,60px);line-height:1.1;color:#f1f5f9;max-width:900px;margin:0 auto 24px;letter-spacing:-0.01em}
+.hero h1 span{color:#22d3cb}
+.hero p{font-size:18px;color:#94a3b8;max-width:680px;margin:0 auto 48px;line-height:1.7;font-weight:300}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:#22d3cb;color:#0d1b2a;font-size:15px;font-weight:500;padding:14px 32px;border-radius:8px;text-decoration:none;transition:opacity 0.2s}
+.btn-primary:hover{opacity:0.85}
+.btn-secondary{border:1px solid rgba(34,211,203,0.4);color:#22d3cb;font-size:15px;font-weight:400;padding:14px 32px;border-radius:8px;text-decoration:none;transition:all 0.2s}
+.btn-secondary:hover{background:rgba(34,211,203,0.08)}
+.hero-divider{width:1px;height:80px;background:rgba(34,211,203,0.2);margin:64px auto 0}
+
+.problem{background:#0a1520}
+.section-label{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#22d3cb;margin-bottom:16px}
+.section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,42px);color:#f1f5f9;margin-bottom:16px;line-height:1.15}
+.section-sub{font-size:16px;color:#64748b;max-width:560px;line-height:1.7;margin-bottom:56px;font-weight:300}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(34,211,203,0.1);border:1px solid rgba(34,211,203,0.1);border-radius:16px;overflow:hidden}
+.problem-card{background:#0d1b2a;padding:36px 32px}
+.problem-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#22d3cb;margin-bottom:12px;letter-spacing:0.03em}
+.problem-card p{font-size:14px;color:#64748b;line-height:1.7;font-weight:300}
+
+.product{background:#0d1b2a}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:64px}
+.step{position:relative;padding:32px;background:#0a1520;border:1px solid rgba(34,211,203,0.1);border-radius:12px}
+.step-num{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:rgba(34,211,203,0.12);line-height:1;margin-bottom:16px}
+.step h3{font-size:15px;font-weight:500;color:#f1f5f9;margin-bottom:10px}
+.step p{font-size:13px;color:#64748b;line-height:1.7;font-weight:300}
+.conditions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.condition-pill{background:#0a1520;border:1px solid rgba(34,211,203,0.15);border-radius:8px;padding:14px 18px;font-size:13px;color:#94a3b8;font-weight:300}
+.condition-pill strong{display:block;color:#22d3cb;font-weight:500;font-size:14px;margin-bottom:2px}
+
+.stats{background:#22d3cb;padding:80px 5vw}
+.stats .inner{max-width:1200px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:48px}
+.stat{text-align:center}
+.stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,4vw,52px);color:#0d1b2a;line-height:1}
+.stat-label{font-size:13px;color:rgba(13,27,42,0.65);margin-top:8px;font-weight:300;line-height:1.4}
+.stats-note{text-align:center;margin-top:48px;font-size:13px;color:rgba(13,27,42,0.5);font-weight:300}
+
+.how{background:#0a1520}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(34,211,203,0.1);border-radius:16px;overflow:hidden}
+.flow-item{padding:40px 32px;border-right:1px solid rgba(34,211,203,0.1);background:#0d1b2a}
+.flow-item:last-child{border-right:none}
+.flow-icon{width:40px;height:40px;border:1px solid rgba(34,211,203,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.flow-item h3{font-size:15px;font-weight:500;color:#f1f5f9;margin-bottom:10px}
+.flow-item p{font-size:13px;color:#64748b;line-height:1.7;font-weight:300}
+.flow-arrow{color:#22d3cb;font-size:20px;display:flex;align-items:center;justify-content:center;padding:40px 0}
+
+.trust{background:#0d1b2a}
+.trust-intro{max-width:680px;margin-bottom:56px}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.trust-card{padding:28px;background:#0a1520;border:1px solid rgba(34,211,203,0.1);border-radius:12px}
+.trust-card h3{font-size:14px;font-weight:500;color:#22d3cb;margin-bottom:10px;letter-spacing:0.02em}
+.trust-card p{font-size:13px;color:#64748b;line-height:1.7;font-weight:300}
+
+.pricing{background:#0a1520}
+.pricing-intro{font-size:16px;color:#64748b;max-width:560px;line-height:1.7;margin-bottom:48px;font-weight:300}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px}
+.price-card{background:#0d1b2a;border:1px solid rgba(34,211,203,0.12);border-radius:12px;padding:28px 24px}
+.price-card.highlight{border-color:#22d3cb;background:#071219}
+.price-card .badge{display:inline-block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#0d1b2a;background:#22d3cb;padding:3px 10px;border-radius:20px;margin-bottom:16px}
+.price-card h3{font-size:13px;color:#64748b;font-weight:300;margin-bottom:8px}
+.price-card .rate{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:#22d3cb;line-height:1;margin-bottom:4px}
+.price-card .unit{font-size:11px;color:#475569;font-weight:300;margin-bottom:16px}
+.price-card .total{font-size:13px;color:#94a3b8;font-weight:400}
+.pcn-box{background:#071219;border:1px solid rgba(34,211,203,0.2);border-radius:12px;padding:28px 32px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.pcn-box h3{font-size:15px;font-weight:500;color:#22d3cb;margin-bottom:8px}
+.pcn-box p{font-size:13px;color:#64748b;font-weight:300;line-height:1.6}
+.pcn-rate{text-align:right;white-space:nowrap}
+.pcn-rate .val{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#22d3cb}
+.pcn-rate .lbl{font-size:11px;color:#475569;font-weight:300}
+.min-note{font-size:12px;color:#334155;margin-top:16px;font-weight:300}
+
+.quote{background:#0d1b2a}
+.quote-inner{max-width:800px;margin:0 auto;text-align:center}
+.quote-mark{font-size:80px;line-height:0.5;color:#22d3cb;opacity:0.3;font-family:Georgia,serif;margin-bottom:32px}
+.quote-text{font-size:clamp(18px,2.5vw,24px);color:#f1f5f9;line-height:1.6;font-weight:300;font-style:italic;margin-bottom:32px}
+.quote-attr{font-size:13px;color:#64748b;font-weight:300}
+.quote-attr strong{color:#22d3cb;font-weight:500}
+
+.nhs{background:#0a1520}
+.nhs-box{border:1px solid rgba(34,211,203,0.15);border-radius:16px;padding:48px;max-width:860px}
+.nhs-box p{font-size:15px;color:#64748b;line-height:1.8;font-weight:300}
+.nhs-box p strong{color:#f1f5f9;font-weight:500}
+
+.contact{background:#0d1b2a;text-align:center}
+.contact-inner{max-width:600px;margin:0 auto}
+.contact h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);color:#f1f5f9;margin-bottom:16px}
+.contact p{font-size:16px;color:#64748b;font-weight:300;line-height:1.7;margin-bottom:48px}
+.contact-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.contact-note{font-size:13px;color:#334155;font-weight:300}
+.contact-note a{color:#22d3cb;text-decoration:none}
+
+footer{background:#060f18;border-top:1px solid rgba(34,211,203,0.08);padding:40px 5vw}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:24px}
+.footer-logo .name{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.08em;color:#f1f5f9}
+.footer-logo .sub{font-size:9px;letter-spacing:0.3em;color:#22d3cb;font-weight:300;text-transform:uppercase;margin-top:2px}
+.footer-tag{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#1e3a4a;font-weight:300}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .flow{grid-template-columns:1fr}
+  .flow-item{border-right:none;border-bottom:1px solid rgba(34,211,203,0.1)}
+  .flow-item:last-child{border-bottom:none}
+  section{padding:72px 5vw}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg viewBox="0 0 68 68" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="34" cy="34" r="32" stroke="#f1f5f9" stroke-width="1.6"/>
+        <circle cx="34" cy="34" r="26" stroke="#22d3cb" stroke-width="0.7" opacity="0.3"/>
+        <path d="M14 14 L34 54 L54 14" stroke="#f1f5f9" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="34" y1="7" x2="34" y2="54" stroke="#22d3cb" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="27" y1="19" x2="41" y2="19" stroke="#22d3cb" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="34" cy="7" r="2.2" fill="#22d3cb"/>
+      </svg>
+      <div>
+        <div class="name">VELLICHOR</div>
+        <div class="sub">Technology</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#product">The product</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a demo</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Pharmacy First Optimiser</div>
+  <h1>You are losing GP time to appointments that should <span>never reach you.</span></h1>
+  <p>Pharmacy First Optimiser analyses your appointment data and tells you exactly how many consultations each month could have gone to a pharmacist instead of a GP — broken down by condition, by clinician, and with a ready-to-use receptionist action plan.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">Book a demonstration</a>
+    <a href="#product" class="btn-secondary">See how it works</a>
+  </div>
+  <div class="hero-divider"></div>
+</div>
+
+<section class="problem" id="problem">
+  <div class="inner">
+    <div class="section-label">The challenge</div>
+    <h2 class="section-title">The pressure is not going away.</h2>
+    <p class="section-sub">Four converging forces are making demand management a survival issue for every GP practice in England.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>The mandate</h3>
+        <p>From April 2026, online consultations are uncapped. Every request must be triaged. The 90% same-day access target for urgent cases is contractual by March 2027. Demand is rising. GP capacity is not.</p>
+      </div>
+      <div class="problem-card">
+        <h3>The gap</h3>
+        <p>Pharmacy First exists for seven conditions that pharmacists can assess and treat without a GP. But most practices deflect inconsistently — when someone remembers, not as a structured process.</p>
+      </div>
+      <div class="problem-card">
+        <h3>The blind spot</h3>
+        <p>Without data, you cannot improve. Most practices have no way of knowing how many appointments last month could have gone to pharmacy. You cannot fix what you cannot measure.</p>
+      </div>
+      <div class="problem-card">
+        <h3>The deadline</h3>
+        <p>From September 2026, all newly qualified pharmacists in England become independent prescribers. The window to build the deflection habit and infrastructure is now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="inner">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">~8%</div>
+        <div class="stat-label">of GP appointments nationally are Pharmacy First eligible</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">~5 hrs</div>
+        <div class="stat-label">of GP time released every week per 10,000 patients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">£90k+</div>
+        <div class="stat-label">annual locum value released for a typical practice</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">14:1</div>
+        <div class="stat-label">return on investment at standard pricing</div>
+      </div>
+    </div>
+    <p class="stats-note">Even a 10% realisation of efficiency gains entirely offsets the annual subscription cost.</p>
+  </div>
+</div>
+
+<section class="product" id="product">
+  <div class="inner">
+    <div class="section-label">The product</div>
+    <h2 class="section-title">What Pharmacy First Optimiser does.</h2>
+    <p class="section-sub">Four steps. No IT team. No integration. No complexity.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Export your data</h3>
+        <p>You export three months of appointment data from EMIS Web or SystmOne. It takes five minutes. No API, no IT team, no system integration required.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>AI analysis</h3>
+        <p>The tool analyses every appointment against the seven Pharmacy First clinical pathways using SNOMED code matching and Anthropic Claude AI to interpret free text booking reasons.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Clinical report</h3>
+        <p>You receive a scrollable clinical report showing every missed deflection, the reasoning behind each flag, and exactly what the receptionist should do differently next time.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Receptionist guide</h3>
+        <p>A condition-by-condition quick reference guide is generated from your own data — ready to share at your next team meeting, with the exact phrases to listen for.</p>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:64px;">Seven conditions covered</div>
+    <div class="conditions-grid">
+      <div class="condition-pill"><strong>Sinusitis</strong>Patients aged 12 and over</div>
+      <div class="condition-pill"><strong>Sore throat</strong>Patients aged 5 and over</div>
+      <div class="condition-pill"><strong>Earache</strong>Patients aged 1 to 17</div>
+      <div class="condition-pill"><strong>Infected insect bite</strong>Patients aged 1 and over</div>
+      <div class="condition-pill"><strong>Impetigo</strong>Patients aged 1 and over</div>
+      <div class="condition-pill"><strong>Shingles</strong>Patients aged 18 and over</div>
+      <div class="condition-pill"><strong>UTI</strong>Women aged 16 to 64</div>
+    </div>
+  </div>
+</section>
+
+<section class="trust" id="trust">
+  <div class="inner">
+    <div class="section-label">Why Vellichor</div>
+    <h2 class="section-title">Built by a GP.<br>Designed for general practice.</h2>
+    <div class="trust-intro">
+      <p style="font-size:16px;color:#64748b;font-weight:300;line-height:1.8;">Pharmacy First Optimiser was built by a practicing GP Partner in Somerset who experienced this problem firsthand. Every decision — from the eligibility rules to the governance model to the report format — was made by someone who understands what a GP consultation looks like, what a reception team needs, and what a practice manager has time for.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <h3>Clinician built</h3>
+        <p>Designed by a GP Partner with direct experience of primary care demand pressure. Not a tech startup working from the outside in.</p>
+      </div>
+      <div class="trust-card">
+        <h3>Advisory only</h3>
+        <p>All outputs are suggestions for human review. No autonomous clinical decisions. Ever. The tool highlights opportunities — clinicians make the final call.</p>
+      </div>
+      <div class="trust-card">
+        <h3>Zero patient identifiable data</h3>
+        <p>Age, sex, and booking reason only. Your CSV is processed and immediately discarded. Nothing is retained. Full UK GDPR compliance.</p>
+      </div>
+      <div class="trust-card">
+        <h3>Works with your systems</h3>
+        <p>Standard appointment exports from EMIS Web and SystmOne. No IT involvement, no API access, no system integration required.</p>
+      </div>
+      <div class="trust-card">
+        <h3>GP-led support</h3>
+        <p>Direct access to the founder for onboarding, clinical governance questions, and ongoing support. Not a helpdesk. A GP colleague.</p>
+      </div>
+      <div class="trust-card">
+        <h3>NHS policy aligned</h3>
+        <p>Output maps directly to the Neighbourhood Health Framework demand intelligence requirements for Integrated Neighbourhood Teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple pricing based on your list size.</h2>
+    <p class="pricing-intro">You pay proportionally to the value you receive. No flat fees, no surprises, no long-term lock-in. Minimum annual fee of £1,800 applies.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Under 8,000 patients</h3>
+        <div class="rate">£320</div>
+        <div class="unit">per 1,000 patients / year</div>
+        <div class="total">£1,800 – £2,560 / yr</div>
+      </div>
+      <div class="price-card">
+        <h3>8,000 – 15,000 patients</h3>
+        <div class="rate">£280</div>
+        <div class="unit">per 1,000 patients / year</div>
+        <div class="total">£2,240 – £4,200 / yr</div>
+      </div>
+      <div class="price-card highlight">
+        <div class="badge">Most common</div>
+        <h3>15,000 – 25,000 patients</h3>
+        <div class="rate">£250</div>
+        <div class="unit">per 1,000 patients / year</div>
+        <div class="total">£3,750 – £6,250 / yr</div>
+      </div>
+      <div class="price-card">
+        <h3>Over 25,000 patients</h3>
+        <div class="rate">£220</div>
+        <div class="unit">per 1,000 patients / year</div>
+        <div class="total">£5,500+ / yr</div>
+      </div>
+    </div>
+    <div class="pcn-box">
+      <div>
+        <h3>PCN network deal</h3>
+        <p>A single contract covering your entire PCN population at a significant discount to individual practice pricing. One invoice, all practices, network-level reporting included.</p>
+      </div>
+      <div class="pcn-rate">
+        <div class="val">£0.20 – £0.28</div>
+        <div class="lbl">per patient / year across the network</div>
+      </div>
+    </div>
+    <p class="min-note">Pricing confirmed on call based on your registered list size. Interactive pricing calculator available on request.</p>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="inner">
+    <div class="quote-inner">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">We tried this tool ourselves and ran it on our own appointment data. The results changed how we brief our reception team every single month.</p>
+      <p class="quote-attr"><strong>Dr Stuart Baker</strong> — GP Partner, French Weir Health Centre, Taunton<br>17,500 patients · 11 GP partners · Somerset</p>
+    </div>
+  </div>
+</section>
+
+<section class="nhs">
+  <div class="inner">
+    <div class="section-label">Policy context</div>
+    <h2 class="section-title" style="margin-bottom:32px;">Aligned with the NHS Neighbourhood Health Framework.</h2>
+    <div class="nhs-box">
+      <p>The NHS Neighbourhood Health Framework, published March 2026, explicitly mandates the expansion of <strong>AI-assisted triage</strong>, the strengthening of the <strong>Pharmacy First pathway</strong>, and the development of <strong>structured demand analytics</strong> to support Integrated Neighbourhood Teams. Pharmacy First Optimiser delivers exactly that. The coded, structured output it generates maps directly to the demand intelligence requirements of the framework — making it strategically valuable not just to individual practices but to <strong>PCN clinical directors and ICB commissioners</strong> building neighbourhood health plans.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="inner">
+    <div class="contact-inner">
+      <div class="section-label">Get started</div>
+      <h2>Start the conversation.</h2>
+      <p>We offer a 20-minute demonstration call where you can see the reports, understand the pricing for your specific practice, and ask any clinical governance questions you have. No pressure, no commitment.</p>
+      <div class="contact-btns">
+        <a href="mailto:muneeb@vellichortechnology.com?subject=Pharmacy First Optimiser — demonstration request" class="btn-primary">Book a demonstration call</a>
+      </div>
+      <p class="contact-note">Or email directly — <a href="mailto:muneeb@vellichortechnology.com">muneeb@vellichortechnology.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="name">VELLICHOR</div>
+      <div class="sub">Technology</div>
+    </div>
+    <div class="footer-tag">Intelligent Healthcare Infrastructure</div>
+    <div style="font-size:12px;color:#1e3a4a;font-weight:300;">vellichortechnology.com</div>
+  </div>
+</footer>
+
+</body>
+</html>
